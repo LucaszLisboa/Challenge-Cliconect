@@ -1,0 +1,3 @@
+INSERT INTO tb_paciente(nome, sexo, cpf, celular, data_nascimento, email, informacoes_atendimento) VALUES ('Maria', 'feminino', '123.456.789-10', '43980808080', '10/11/2000', 'maria@gmail.com', 'Informações de atendimento');
+
+--INSERT INTO tb_paciente(nome, sexo, cpf, celular, data_nascimento, email, informacoes_atendimento) VALUES ('João', 'masculino', '123.456.789-11', '43980808081', '10/11/2001', 'joao@gmail.com ', 'Informações de atendimento');
