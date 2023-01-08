@@ -1,7 +1,7 @@
 package com.lucas.cliconect.controllers;
 
-import com.lucas.cliconect.model.Paciente;
-import com.lucas.cliconect.repository.PacienteRepository;
+import com.lucas.cliconect.models.Paciente;
+import com.lucas.cliconect.services.PacienteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,41 +14,30 @@ import java.util.List;
 public class PacienteController {
 
     @Autowired
-    private PacienteRepository pacienteRepository;
+    private PacienteService pacienteService;
 
     @GetMapping
     public List<Paciente> findAll(){
-        return pacienteRepository.findAll();
+        return pacienteService.exibirPacientes();
     }
 
     @GetMapping("/{id}")
     public Paciente findById(@PathVariable Long id) {
-        return pacienteRepository.findById(id).get();
+        return pacienteService.exibirPacienteById(id);
     }
 
     @PostMapping
     public ResponseEntity<String> createPaciente(@Valid @RequestBody Paciente paciente){
-        pacienteRepository.save(paciente);
-        return ResponseEntity.ok("Paciente cadastrado com sucesso");
+        return pacienteService.salvarCadastro(paciente);
     }
 
     @PutMapping("/{id}")
-    public Paciente updatePaciente(@PathVariable Long id, @RequestBody Paciente paciente){
-        Paciente pacienteFound = pacienteRepository.findById(id).get();
-        pacienteFound.setNome(paciente.getNome());
-        pacienteFound.setSexo(paciente.getSexo());
-        pacienteFound.setCpf(paciente.getCpf());
-        pacienteFound.setCelular(paciente.getCelular());
-        pacienteFound.setEmail(paciente.getEmail());
-        pacienteFound.setDataNascimento(paciente.getDataNascimento());
-        pacienteFound.setInformacoesAtendimento(paciente.getInformacoesAtendimento());
-        return pacienteRepository.save(pacienteFound);
+    public ResponseEntity<String> updatePaciente(@PathVariable Long id, @RequestBody Paciente paciente){
+        return pacienteService.updatePaciente(id, paciente);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePaciente(@PathVariable Long id){
-        pacienteRepository.deleteById(id);
-        return ResponseEntity.ok("Cadastro de paciente deletado com sucesso!");
-
+        return pacienteService.deletePaciente(id);
     }
 }

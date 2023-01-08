@@ -1,12 +1,12 @@
-package com.lucas.cliconect.model;
+package com.lucas.cliconect.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "tb_paciente")
+@Table (name = "tb_paciente")
 public class Paciente {
 
     @Id
@@ -16,18 +16,29 @@ public class Paciente {
     private String nome;
     @NotBlank(message = "Sexo é obrigatório")
     private String sexo;
-//    private Endereco endereco;
     @NotBlank(message = "CPF é obrigatório")
+    @Size (min = 11, max = 11, message = "CPF deve conter 11 dígitos")
     private String cpf;
     @NotBlank(message = "Celular é obrigatório")
     private String celular;
     @NotBlank(message = "Data de nascimento é obrigatório")
-    private String data_nascimento;
+    private String dataNascimento;
     @NotBlank(message = "Email é obrigatório")
     @Email
     private String email;
     @NotBlank(message = "Informações de atendimento é obrigatório")
-    private String informacoes_atendimento;
+    private String informacoesAtendimento;
+
+    @NotBlank(message = "Rua é obrigatório")
+    private String rua;
+    @NotBlank(message = "Numero é obrigatório")
+    private String numero;
+    @NotBlank(message = "Bairro é obrigatório")
+    private String bairro;
+    @NotBlank(message = "Cidade é obrigatório")
+    private String cidade;
+    @NotBlank(message = "Estado é obrigatório")
+    private String estado;
 
     public Paciente(){
     }
@@ -65,11 +76,11 @@ public class Paciente {
     }
 
     public String getDataNascimento() {
-        return data_nascimento;
+        return dataNascimento;
     }
 
-    public void setDataNascimento(String data_nascimento) {
-        this.data_nascimento = data_nascimento;
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public String getEmail() {
@@ -81,11 +92,11 @@ public class Paciente {
     }
 
     public String getInformacoesAtendimento() {
-        return informacoes_atendimento;
+        return informacoesAtendimento;
     }
 
-    public void setInformacoesAtendimento(String informacoes_atendimento) {
-        this.informacoes_atendimento = informacoes_atendimento;
+    public void setInformacoesAtendimento(String informacoesAtendimento) {
+        this.informacoesAtendimento = informacoesAtendimento;
     }
 
     public Long getId() {
@@ -96,11 +107,44 @@ public class Paciente {
         Id = id;
     }
 
-    //    public Endereco getEndereco() {
-//        return endereco;
-//    }
-//
-//    public void setEndereco(Endereco endereco) {
-//        this.endereco = endereco;
-//    }
+    public String getRua() {
+        return rua;
+    }
+
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
 }
