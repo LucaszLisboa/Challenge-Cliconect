@@ -1,0 +1,214 @@
+<div class="container">
+  <div class="card list-paciente">
+    <h3 class="card-header">Lista de Pacientes</h3>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Sexo</th>
+            <th scope="col">Cpf</th>
+            <th scope="col">Celular</th>
+            <th scope="col">Nascimento</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Informações</th>
+            <th scope="col">Rua</th>
+            <th scope="col">Número</th>
+            <th scope="col">Bairro</th>
+            <th scope="col">Cidade</th>
+            <th scope="col">Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let paciente of pacientes">
+            <td>{{paciente.id}}</td>
+            <td>{{paciente.nome}}</td>
+            <td>{{paciente.sexo}}</td>
+            <td>{{paciente.cpf}}</td>
+            <td>{{paciente.celular}}</td>
+            <td>{{paciente.dataNascimento}}</td>
+            <td>{{paciente.email}}</td>
+            <td>{{paciente.informacoesAtendimento}}</td> 
+            <td>{{paciente.rua}}</td>
+            <td>{{paciente.numero}}</td>
+            <td>{{paciente.bairro}}</td>
+            <td>{{paciente.cidade}}</td>
+            <td>{{paciente.estado}}</td>
+
+            <td>
+              <button type="button" class="btn btn-warning btn-sm" (click)="editPaciente(paciente)">Editar</button>
+              <button type="button" class="btn btn-danger btn-sm ml-1" (click)="deletePaciente(paciente.id)">Deletar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table> 
+    </div>
+    <div>
+      <mat-paginator
+                class="mat-elevation-z8"
+                [length]="pacientes.length"
+                [pageSize]="10"
+                [pageSizeOptions]="[3, 5, 10]">
+      </mat-paginator>
+    </div>
+  </div>
+
+  <div class="card add-paciente">
+    <h5 class="card-header">Adicionar/Atualizar Paciente</h5>
+    <div class="card-body">
+      <form id="add-form" (ngSubmit)="f.form.valid && savePaciente(f)" #f="ngForm" novalidate>
+        <div class="form-group">
+          <label for="nome">Nome</label>
+          <input type="text" [(ngModel)]="paciente.nome" id="nome" name="nome" #nome="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && nome.invalid }" placeholder="Digite o nome">
+          <div *ngIf="f.submitted && nome.invalid" class="invalid-feedback">
+            <div *ngIf="nome.errors?.['required']">Nome é obrigatório</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="sexo">Sexo</label>
+          <input type="text" [(ngModel)]="paciente.sexo" id="sexo" name="sexo" #sexo="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && sexo.invalid }" placeholder="Digite o sexo">
+          <div *ngIf="f.submitted && sexo.invalid" class="invalid-feedback">
+            <div *ngIf="sexo.errors?.['required']">Sexo é obrigatório</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="cpf">Cpf</label>
+          <input type="text" [(ngModel)]="paciente.cpf" id="cpf" name="cpf" #cpf="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && cpf.invalid }" placeholder="Digite o cpf">
+          <div *ngIf="f.submitted && cpf.invalid" class="invalid-feedback">
+            <div *ngIf="cpf.errors?.['required']">Cpf é obrigatório</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="celular">Celular</label>
+          <input type="text" [(ngModel)]="paciente.celular" id="celular" name="celular" #celular="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && celular.invalid }" placeholder="Digite o celular">
+          <div *ngIf="f.submitted && celular.invalid" class="invalid-feedback">
+            <div *ngIf="celular.errors?.['required']">Celular é obrigatório</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="dataNascimento">Data de Nascimento</label>
+          <input type="text" [(ngModel)]="paciente.dataNascimento" id="dataNascimento" name="dataNascimento" #dataNascimento="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && dataNascimento.invalid }" placeholder="Digite a data de nascimento">
+          <div *ngIf="f.submitted && dataNascimento.invalid" class="invalid-feedback">
+            <div *ngIf="dataNascimento.errors?.['required']">Data de Nascimento é obrigatório</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="text" [(ngModel)]="paciente.email" id="email" name="email" #email="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" placeholder="Digite o e-mail">
+          <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+            <div *ngIf="email.errors?.['required']">E-mail é obrigatório</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="informacoesAtendimento">Informações</label>
+          <input type="text" [(ngModel)]="paciente.informacoesAtendimento" id="informacoesAtendimento" name="informacoesAtendimento" #informacoesAtendimento="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && informacoesAtendimento.invalid }" placeholder="Digite as informações">
+          <div *ngIf="f.submitted && informacoesAtendimento.invalid" class="invalid-feedback">
+            <div *ngIf="informacoesAtendimento.errors?.['required']">Informações é obrigatório</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="rua">Rua</label>
+          <input type="text" [(ngModel)]="paciente.rua" id="rua" name="rua" #rua="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && rua.invalid }" placeholder="Digite a rua">
+          <div *ngIf="f.submitted && rua.invalid" class="invalid-feedback">
+            <div *ngIf="rua.errors?.['required']">Rua é obrigatório</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="numero">Número</label>
+          <input type="text" [(ngModel)]="paciente.numero" id="numero" name="numero" #numero="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && numero.invalid }" placeholder="Digite o número">
+          <div *ngIf="f.submitted && numero.invalid" class="invalid-feedback">
+            <div *ngIf="numero.errors?.['required']">Número é obrigatório</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="bairro">Bairro</label>
+          <input type="text" [(ngModel)]="paciente.bairro" id="bairro" name="bairro" #bairro="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && bairro.invalid }" placeholder="Digite o bairro">
+          <div *ngIf="f.submitted && bairro.invalid" class="invalid-feedback">
+            <div *ngIf="bairro.errors?.['required']">Bairro é obrigatório</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="cidade">Cidade</label>
+          <input type="text" [(ngModel)]="paciente.cidade" id="cidade" name="cidade" #cidade="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && cidade.invalid }" placeholder="Digite a cidade">
+          <div *ngIf="f.submitted && cidade.invalid" class="invalid-feedback">
+            <div *ngIf="cidade.errors?.['required']">Cidade é obrigatório</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="estado">Estado</label>
+          <input type="text" [(ngModel)]="paciente.estado" id="estado" name="estado" #estado="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && estado.invalid }" placeholder="Digite o estado">
+          <div *ngIf="f.submitted && estado.invalid" class="invalid-feedback">
+            <div *ngIf="estado.errors?.['required']">Estado é obrigatório</div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-add-paciente">Salvar</button>
+        <button type="reset" class="btn btn-secondary btn-add-paciente" (click)="cleanForm(f)">Cancelar</button>
+      </form>
+    </div>
+
+  </div>
+
+
+
+  <!-- <div class="table">
+    <table mat-table [dataSource]="dataSource">
+
+      <div class="paciente" *ngFor="let paciente of pacientes">
+        
+      </div>
+
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> Id </th>
+        <td mat-cell *matCellDef="let paciente of pacientes"> {{paciente.nome}} </td>
+      </ng-container>
+
+     
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef> Nome </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+    
+      <ng-container matColumnDef="sexo">
+        <th mat-header-cell *matHeaderCellDef> Sexo </th>
+        <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+      </ng-container>
+
+      
+      <ng-container matColumnDef="cpf">
+        <th mat-header-cell *matHeaderCellDef> Cpf </th>
+        <td mat-cell *matCellDef="let element"> 1239497802 </td>
+      </ng-container>
+
+      <ng-container matColumnDef="celular">
+        <th mat-header-cell *matHeaderCellDef> Celular </th>
+        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dataDeNascimento">
+        <th mat-header-cell *matHeaderCellDef> Data De Nascimento </th>
+        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> E-mail </th>
+        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="informacoes">
+        <th mat-header-cell *matHeaderCellDef> Informações </th>
+        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+      </ng-container>
+      
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                  showFirstLastButtons
+                  aria-label="Select page of periodic elements">
+    </mat-paginator>
+  </div> -->
+</div>
