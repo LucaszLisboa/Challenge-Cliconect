@@ -31,17 +31,62 @@ public class PacienteServiceImplementationTest {
     private PacienteRepository pacienteRepository;
 
     @Test
+    public void testSalvarCadastro(){
+        Paciente paciente = new Paciente();
+        paciente.setNome("Carlos");
+        paciente.setSexo("Masculino");
+        paciente.setCpf("98765432199");
+        paciente.setEmail("carlos@gmail.com");
+        paciente.setCelular("43996543211");
+        paciente.setDataNascimento("10/05/2000");
+        paciente.setInformacoesAtendimento("Paciente com dor de barriga");
+        paciente.setRua("Rua das Pedras");
+        paciente.setNumero("321");
+        paciente.setBairro("Centro");
+        paciente.setCidade("Londrina");
+        paciente.setEstado("PR");
+        pacienteServiceImplementation.salvarCadastro(paciente);
+        assertEquals("Carlos", paciente.getNome());
+        assertEquals("98765432199", paciente.getCpf());
+
+    }
+
+    @Test
     public void testExibirPacientes() {
         List<Paciente> pacientes = pacienteServiceImplementation.exibirPacientes();
-        System.out.println(pacientes);
+        assertEquals(2, pacientes.size());
+
     }
 
 
     @Test
     public void testExibirPacienteById() {
         Paciente paciente = pacienteServiceImplementation.exibirPacienteById(1L);
-        System.out.println(paciente);
+        assertEquals("1", String.valueOf(paciente.getId()));
+        assertEquals("Lucas", paciente.getNome());
+        assertEquals("Masculino", paciente.getSexo());
+        assertEquals("12345678910", paciente.getCpf());
+        assertEquals("43996543211", paciente.getCelular());
+        assertEquals("20/10/1998", paciente.getDataNascimento());
+        assertEquals("lucas@gmail.com", paciente.getEmail());
+        assertEquals("Rua das Flores", paciente.getRua());
+        assertEquals("123", paciente.getNumero());
+        assertEquals("Centro", paciente.getBairro());
+        assertEquals("Cascavel", paciente.getCidade());
+        assertEquals("PR", paciente.getEstado());
+        assertEquals("Paciente com dor de cabeça", paciente.getInformacoesAtendimento());
     }
+
+    @Test
+    public void testUpdatePaciente(){
+        Optional<Paciente> paciente = pacienteRepository.findById(2L);
+        paciente.get().setNome("Yuri Santos");
+        paciente.get().setInformacoesAtendimento("Paciente com dor no corpo");
+        pacienteServiceImplementation.updatePaciente(paciente.get().getId(), paciente.get());
+        assertEquals("Yuri Santos", paciente.get().getNome());
+        assertEquals("Paciente com dor no corpo", paciente.get().getInformacoesAtendimento());
+    }
+
 
     @Test
     public void testDeletePaciente() {
@@ -50,5 +95,4 @@ public class PacienteServiceImplementationTest {
         assertFalse(optinalPaciente.isPresent());
 
     }
-
 }

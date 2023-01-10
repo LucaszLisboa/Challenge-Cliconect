@@ -1,1 +1,0 @@
-INSERT INTO tb_paciente(nome, sexo, cpf, celular, dataNascimento, email, informacoesAtendimento, rua, numero, bairro, cidade, estado) VALUES ('Maria', 'feminino', '123.456.789-10', '43980808080', '10/11/2000', 'maria@gmail.com', 'Informações de atendimento', 'Rua Alagoas', '10', 'Centro', 'Londrina', 'Paraná');
