@@ -6,10 +6,6 @@ import { Paciente } from 'src/app/models/paciente';
 import { NgForm } from '@angular/forms';
 import { tap } from 'rxjs';
 
-/**
- * @title Basic use of `<table mat-table>`
- */
-
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -20,9 +16,6 @@ export class TableComponent implements OnInit, AfterViewInit {
 
   paciente = {} as Paciente;
   pacientes: Paciente[];
-
-  // displayedColumns: string[] = ['position', 'nome', 'sexo', 'cpf', 'celular', 'dataDeNascimento', 'email', 'informacoes'];
-  // dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
   @ViewChild(MatPaginator) 
   paginator: MatPaginator; 
@@ -41,9 +34,9 @@ export class TableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-
+    
     this.getPacientes();
-    console.log();
+
     this.pacienteService.getPacientes().subscribe(
       (data) => {
         console.log(data);
@@ -67,20 +60,18 @@ export class TableComponent implements OnInit, AfterViewInit {
 
   getPacientes(){
     this.pacienteService.getPacientes()
-      .pipe(
-        tap(() => this.getPacientes())
-      )
-      .subscribe((pacientes: any) => {
+      // .pipe(
+      //   tap(() => this.getPacientes())
+      // )
+      .subscribe((pacientes: Paciente[]) => {
         this.pacientes = pacientes;
-      }
-      );
+      });
   }
 
-  deletePaciente(id: number){
-    this.pacienteService.deletePaciente(id).subscribe(() => {
+  deletePaciente(paciente: Paciente){
+    this.pacienteService.deletePaciente(paciente).subscribe(() => {
       this.getPacientes();
-    }
-    );
+    });
   }
 
   editPaciente(paciente: Paciente){
@@ -98,17 +89,7 @@ export class TableComponent implements OnInit, AfterViewInit {
   }
 }
 
-// export interface PeriodicElement {
-//   name: string;
-//   position: number;
-//   weight: number;
-//   symbol: string;
-// }
 
-// const ELEMENT_DATA: PeriodicElement[] = [
-//   {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-//   {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-// ];
 
 
   

@@ -38,7 +38,7 @@
 
             <td>
               <button type="button" class="btn btn-warning btn-sm" (click)="editPaciente(paciente)">Editar</button>
-              <button type="button" class="btn btn-danger btn-sm ml-1" (click)="deletePaciente(paciente.id)">Deletar</button>
+              <button type="button" class="btn btn-danger btn-sm ml-1" (click)="deletePaciente(paciente)" onclick="window.location.reload()">Deletar</button>
             </td>
           </tr>
         </tbody>
@@ -47,7 +47,7 @@
     <div>
       <mat-paginator
                 class="mat-elevation-z8"
-                [length]="pacientes.length"
+                [length] = "pacientes.length"
                 [pageSize]="10"
                 [pageSizeOptions]="[3, 5, 10]">
       </mat-paginator>
@@ -142,7 +142,7 @@
             <div *ngIf="estado.errors?.['required']">Estado é obrigatório</div>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-add-paciente">Salvar</button>
+        <button type="submit" class="btn btn-primary btn-add-paciente" onclick="window.location.reload()">Salvar</button>
         <button type="reset" class="btn btn-secondary btn-add-paciente" (click)="cleanForm(f)">Cancelar</button>
       </form>
     </div>
