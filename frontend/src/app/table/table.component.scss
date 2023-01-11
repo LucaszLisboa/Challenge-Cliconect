@@ -1,37 +1,3 @@
-// .container{
-//   margin-top: 50px;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   background-color: white;
-// }
-
-// .table {
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   width: 100%;
-//   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.3);
-// }
-
-// table{
-//   background-color: white;
-// }
-
-// td{
-//   color: black;
-//   border-bottom: 1px solid rgb(225, 225, 225);
-// }
-// th{
-//   color: black;
-//   border-bottom: 1px solid rgb(199, 199, 199);
-// }
-
-// .paciente{
-//   color: black;
-// }
-
-
 .container {
   margin-top: 30px;
   max-width: 85%;
@@ -40,6 +6,7 @@
 .card-header{
   font-weight: bold;
   font-size: 17px;
+  background-color: #03a5c9;
 }
 
 .add-paciente {
@@ -54,4 +21,9 @@
   margin-right: 10px;
 }
 
-
+.paginator{
+  // color: black;
+  // background-color: #0000007a;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}

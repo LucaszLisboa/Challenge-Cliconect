@@ -1,27 +1,43 @@
 <div class="container">
-  <div class="card list-paciente">
+  <div class="card list-paciente mat-elevation-z8">
     <h3 class="card-header">Lista de Pacientes</h3>
     <div class="card-body">
-      <table class="table">
+      <!-- <mdb-form-control>
+        <input
+          mdbInput
+          type="text"
+          class="form-control"
+          id="search-input"
+          (keyup)="search($event)"
+        />
+        <label mdbLabel class="form-label" for="search-input">Search</label>
+      </mdb-form-control> -->
+      
+      <table
+        class="table"
+        sort
+        matSort
+        matSortActive="id"
+        >
         <thead>
           <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Sexo</th>
-            <th scope="col">Cpf</th>
-            <th scope="col">Celular</th>
-            <th scope="col">Nascimento</th>
-            <th scope="col">E-mail</th>
-            <th scope="col">Informações</th>
-            <th scope="col">Rua</th>
-            <th scope="col">Número</th>
-            <th scope="col">Bairro</th>
-            <th scope="col">Cidade</th>
-            <th scope="col">Estado</th>
+            <th mat-sort-header="id">ID</th>
+            <th mat-sort-header="nome">Nome</th>
+            <th mat-sort-header="sexo">Sexo</th>
+            <th mat-sort-header="cpf">Cpf</th>
+            <th mat-sort-header="celular">Celular</th>
+            <th mat-sort-header="dataNascimento">Data de Nascimento</th>
+            <th mat-sort-header="email">Email</th>
+            <th mat-sort-header="informacoesAtendimento">Informações de Atendimento</th>
+            <th mat-sort-header="rua">Rua</th>
+            <th mat-sort-header="numero">Número</th>
+            <th mat-sort-header="bairro">Bairro</th>
+            <th mat-sort-header="cidade">Cidade</th>
+            <th mat-sort-header="estado">Estado</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let paciente of pacientes">
+          <tr *ngFor="let paciente of pageSlice">
             <td>{{paciente.id}}</td>
             <td>{{paciente.nome}}</td>
             <td>{{paciente.sexo}}</td>
@@ -46,10 +62,12 @@
     </div>
     <div>
       <mat-paginator
-                class="mat-elevation-z8"
+                class="paginator"
                 [length] = "pacientes.length"
-                [pageSize]="10"
-                [pageSizeOptions]="[3, 5, 10]">
+                [pageSize]="5"
+                [pageSizeOptions]="[3, 5, 10, 20]"
+                showFirstLastButtons
+                (page)="onPageChange($event)">
       </mat-paginator>
     </div>
   </div>
@@ -150,65 +168,92 @@
   </div>
 
 
+  <!-- <mat-toolbar color="secondary">Lista de Pacientes</mat-toolbar>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="pageSlice">
 
-  <!-- <div class="table">
-    <table mat-table [dataSource]="dataSource">
-
-      <div class="paciente" *ngFor="let paciente of pacientes">
-        
-      </div>
-
-      <ng-container matColumnDef="position">
+      <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef> Id </th>
-        <td mat-cell *matCellDef="let paciente of pacientes"> {{paciente.nome}} </td>
+        <td mat-cell *matCellDef="let paciente"> {{paciente.id}} </td>
       </ng-container>
 
      
       <ng-container matColumnDef="nome">
         <th mat-header-cell *matHeaderCellDef> Nome </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        <td mat-cell *matCellDef="let paciente"> {{paciente.nome}} </td>
       </ng-container>
 
     
       <ng-container matColumnDef="sexo">
         <th mat-header-cell *matHeaderCellDef> Sexo </th>
-        <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+        <td mat-cell *matCellDef="let paciente"> {{paciente.sexo}} </td>
       </ng-container>
 
       
       <ng-container matColumnDef="cpf">
         <th mat-header-cell *matHeaderCellDef> Cpf </th>
-        <td mat-cell *matCellDef="let element"> 1239497802 </td>
+        <td mat-cell *matCellDef="let paciente"> {{paciente.cpf}} </td>
       </ng-container>
 
       <ng-container matColumnDef="celular">
         <th mat-header-cell *matHeaderCellDef> Celular </th>
-        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+        <td mat-cell *matCellDef="let paciente"> {{paciente.celular}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="dataDeNascimento">
+      <ng-container matColumnDef="dataNascimento">
         <th mat-header-cell *matHeaderCellDef> Data De Nascimento </th>
-        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+        <td mat-cell *matCellDef="let paciente"> {{paciente.dataNascimento}} </td>
       </ng-container>
 
       <ng-container matColumnDef="email">
         <th mat-header-cell *matHeaderCellDef> E-mail </th>
-        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+        <td mat-cell *matCellDef="let paciente"> {{paciente.email}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="informacoes">
+      <ng-container matColumnDef="informacoesAtendimento">
         <th mat-header-cell *matHeaderCellDef> Informações </th>
-        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+        <td mat-cell *matCellDef="let paciente"> {{paciente.informacoesAtendimento}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="rua">
+        <th mat-header-cell *matHeaderCellDef> Rua </th>
+        <td mat-cell *matCellDef="let paciente"> {{paciente.rua}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="numero">
+        <th mat-header-cell *matHeaderCellDef> Número </th>
+        <td mat-cell *matCellDef="let paciente"> {{paciente.numero}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="bairro">
+        <th mat-header-cell *matHeaderCellDef> Bairro </th>
+        <td mat-cell *matCellDef="let paciente"> {{paciente.bairro}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="cidade">
+        <th mat-header-cell *matHeaderCellDef> Cidade </th>
+        <td mat-cell *matCellDef="let paciente"> {{paciente.cidade}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="estado">
+        <th mat-header-cell *matHeaderCellDef> Estado </th>
+        <td mat-cell *matCellDef="let paciente"> {{paciente.estado}} </td>
       </ng-container>
       
-
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+    <mat-paginator
+                  [pageSizeOptions]="[1, 2, 20]"
+                  [length]="pacientes.length"
                   showFirstLastButtons
-                  aria-label="Select page of periodic elements">
+                  aria-label="Select page of periodic elements"
+                  (page)="onPageChange($event)">
     </mat-paginator>
   </div> -->
+
+
+  
 </div>
+
