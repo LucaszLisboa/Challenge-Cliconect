@@ -19,6 +19,8 @@ export class TableComponent implements OnInit, AfterViewInit {
   paciente = {} as Paciente;
   pacientes: Paciente[] = [];
 
+  searchText = '';
+
   pageSlice: any;
 
   displayedColumns: string[] = ['id', 'nome','sexo', 'cpf', 'celular', 'email', 'dataNascimento','informacoesAtendimento','rua',

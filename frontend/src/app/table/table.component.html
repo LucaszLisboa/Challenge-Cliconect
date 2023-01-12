@@ -1,24 +1,8 @@
 <div class="container">
   <div class="card list-paciente mat-elevation-z8">
     <h3 class="card-header">Lista de Pacientes</h3>
-    <div class="card-body">
-      <!-- <mdb-form-control>
-        <input
-          mdbInput
-          type="text"
-          class="form-control"
-          id="search-input"
-          (keyup)="search($event)"
-        />
-        <label mdbLabel class="form-label" for="search-input">Search</label>
-      </mdb-form-control> -->
-      
-      <table
-        class="table"
-        sort
-        matSort
-        matSortActive="id"
-        >
+      <input type="text" class="form-control search" placeholder="Search" [(ngModel)]="searchText" >
+      <table class="table table-hover table-striped">
         <thead>
           <tr>
             <th mat-sort-header="id">ID</th>
@@ -37,10 +21,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let paciente of pageSlice">
+          <tr *ngFor="let paciente of pageSlice | search: searchText" class="line">
             <td>{{paciente.id}}</td>
             <td>{{paciente.nome}}</td>
-            <td>{{paciente.sexo}}</td>
+            <td>{{paciente.sexo}}</td> 
             <td>{{paciente.cpf}}</td>
             <td>{{paciente.celular}}</td>
             <td>{{paciente.dataNascimento}}</td>
@@ -51,15 +35,14 @@
             <td>{{paciente.bairro}}</td>
             <td>{{paciente.cidade}}</td>
             <td>{{paciente.estado}}</td>
-
             <td>
-              <button type="button" class="btn btn-warning btn-sm" (click)="editPaciente(paciente)">Editar</button>
-              <button type="button" class="btn btn-danger btn-sm ml-1" (click)="deletePaciente(paciente)" onclick="window.location.reload()">Deletar</button>
+              <mat-icon type="button" (click)="editPaciente(paciente)">edit</mat-icon>
+              <mat-icon type="button" (click)="deletePaciente(paciente)" onclick="window.location.reload()">delete</mat-icon>
             </td>
           </tr>
         </tbody>
       </table> 
-    </div>
+    
     <div>
       <mat-paginator
                 class="paginator"

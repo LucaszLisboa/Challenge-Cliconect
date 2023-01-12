@@ -26,14 +26,15 @@ import { MdbScrollspyModule } from 'mdb-angular-ui-kit/scrollspy';
 import { MdbTabsModule } from 'mdb-angular-ui-kit/tabs';
 import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation'
+import { SearchPipe } from './search.pipe';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    TableComponent
-    
+    TableComponent,
+    SearchPipe
   ],
   imports: [
     FormsModule,
@@ -59,6 +60,7 @@ import { MdbValidationModule } from 'mdb-angular-ui-kit/validation'
     MdbTabsModule,
     MdbTooltipModule,
     MdbValidationModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

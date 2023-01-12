@@ -24,7 +24,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatChipsModule } from '@angular/material/chips';
-// import { MatIconModule } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -62,7 +62,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
         MatExpansionModule,
         MatButtonToggleModule,
         MatChipsModule,
-        // MatIconModule,
+        MatIconModule,
         MatProgressSpinnerModule,
         MatProgressBarModule,
         MatDialogModule,
@@ -76,7 +76,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     exports: [
         MatButtonModule,
         MatToolbarModule,
-        // MatIconModule,
+        MatIconModule,
         MatSidenavModule,
         MatBadgeModule,
         MatListModule,
