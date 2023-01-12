@@ -1,12 +1,10 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatSort, Sort } from '@angular/material/sort';
 import { PacienteService } from 'src/app/services/paciente.service';
 import { Paciente } from 'src/app/models/paciente';
 import { NgForm } from '@angular/forms';
-import { NEVER, tap } from 'rxjs';
-import { MdbTableDirective } from 'angular-bootstrap-md';
+
 
 @Component({
   selector: 'app-table',
@@ -30,13 +28,7 @@ export class TableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) 
   paginator: MatPaginator; 
 
-  @ViewChild(MatSort)
-  sort!: MatSort;
-  
-  constructor(
-    private pacienteService: PacienteService
-  ) { 
-    
+  constructor(private pacienteService: PacienteService) {   
   }
 
   onPageChange(event: PageEvent) {
@@ -56,20 +48,19 @@ export class TableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    
-
-
     this.getPacientes();
+  }
 
-    // this.pacienteService.getPacientes().subscribe(
-    //   (data) => {
-    //     console.log(data);
-    //     this.dataSource = new MatTableDataSource(data);
-    //     this.dataSource.paginator = this.paginator;
-    //     this.dataSource.sort = this.sort;
-    //   },
-    // );
-  
+  verificaEmailCadastro() {
+    this.pacienteService.getPacientes().subscribe((pacientes: Paciente[]) => {
+      pacientes.forEach(paciente => {
+        if (paciente.email == this.paciente.email) {
+          alert('Email já cadastrado!');
+          this.paciente.email = '';
+        }
+      });
+    }
+    );
   }
 
   savePaciente (form: NgForm) {
@@ -112,16 +103,6 @@ export class TableComponent implements OnInit, AfterViewInit {
   handlePageEvent(event: any){
     console.log(event);
   }
-
-  // search(event: Event): void {
-  //   const searchTerm = (event.target as HTMLInputElement).value;
-  //   this.table.searchDataObservable(searchTerm);
-  // }
-
-}
-
-function compare(a: number | string, b: number | string, isAsc: boolean) {
-  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
 
 

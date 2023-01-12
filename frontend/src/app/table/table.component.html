@@ -1,47 +1,51 @@
 <div class="container">
   <div class="card list-paciente mat-elevation-z8">
     <h3 class="card-header">Lista de Pacientes</h3>
-      <input type="text" class="form-control search" placeholder="Search" [(ngModel)]="searchText" >
-      <table class="table table-hover table-striped">
-        <thead>
-          <tr>
-            <th mat-sort-header="id">ID</th>
-            <th mat-sort-header="nome">Nome</th>
-            <th mat-sort-header="sexo">Sexo</th>
-            <th mat-sort-header="cpf">Cpf</th>
-            <th mat-sort-header="celular">Celular</th>
-            <th mat-sort-header="dataNascimento">Data de Nascimento</th>
-            <th mat-sort-header="email">Email</th>
-            <th mat-sort-header="informacoesAtendimento">Informações de Atendimento</th>
-            <th mat-sort-header="rua">Rua</th>
-            <th mat-sort-header="numero">Número</th>
-            <th mat-sort-header="bairro">Bairro</th>
-            <th mat-sort-header="cidade">Cidade</th>
-            <th mat-sort-header="estado">Estado</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let paciente of pageSlice | search: searchText" class="line">
-            <td>{{paciente.id}}</td>
-            <td>{{paciente.nome}}</td>
-            <td>{{paciente.sexo}}</td> 
-            <td>{{paciente.cpf}}</td>
-            <td>{{paciente.celular}}</td>
-            <td>{{paciente.dataNascimento}}</td>
-            <td>{{paciente.email}}</td>
-            <td>{{paciente.informacoesAtendimento}}</td> 
-            <td>{{paciente.rua}}</td>
-            <td>{{paciente.numero}}</td>
-            <td>{{paciente.bairro}}</td>
-            <td>{{paciente.cidade}}</td>
-            <td>{{paciente.estado}}</td>
-            <td>
-              <mat-icon type="button" (click)="editPaciente(paciente)">edit</mat-icon>
-              <mat-icon type="button" (click)="deletePaciente(paciente)" onclick="window.location.reload()">delete</mat-icon>
-            </td>
-          </tr>
-        </tbody>
-      </table> 
+    <div class="search">
+      <input type="text" class="form-control" placeholder="Procurar" [(ngModel)]="searchText" >
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th mat-sort-header="id">ID</th>
+          <th mat-sort-header="nome">Nome</th>
+          <th mat-sort-header="sexo">Sexo</th>
+          <th mat-sort-header="cpf">Cpf</th>
+          <th mat-sort-header="celular">Celular</th>
+          <th mat-sort-header="dataNascimento">Data de Nascimento</th>
+          <th mat-sort-header="email">Email</th>
+          <th mat-sort-header="informacoesAtendimento">Informações de Atendimento</th>
+          <th mat-sort-header="rua">Rua</th>
+          <th mat-sort-header="numero">Número</th>
+          <th mat-sort-header="bairro">Bairro</th>
+          <th mat-sort-header="cidade">Cidade</th>
+          <th mat-sort-header="estado">Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let paciente of pageSlice | search: searchText" class="line">
+          <td>{{paciente.id}}</td>
+          <td>{{paciente.nome}}</td>
+          <td>{{paciente.sexo}}</td> 
+          <td>{{paciente.cpf}}</td>
+          <td>{{paciente.celular}}</td>
+          <td>{{paciente.dataNascimento}}</td>
+          <td>{{paciente.email}}</td>
+          <td>{{paciente.informacoesAtendimento}}</td> 
+          <td>{{paciente.rua}}</td>
+          <td>{{paciente.numero}}</td>
+          <td>{{paciente.bairro}}</td>
+          <td>{{paciente.cidade}}</td>
+          <td>{{paciente.estado}}</td>
+          <td>
+          <div class="icons">
+            <mat-icon type="button" class="icon" (click)="editPaciente(paciente)">edit</mat-icon>
+            <mat-icon type="button" class="icon" (click)="deletePaciente(paciente)" onclick="window.location.reload()">delete</mat-icon>
+          </div>
+          </td>
+        </tr>
+      </tbody>
+    </table> 
     
     <div>
       <mat-paginator
@@ -61,182 +65,94 @@
       <form id="add-form" (ngSubmit)="f.form.valid && savePaciente(f)" #f="ngForm" novalidate>
         <div class="form-group">
           <label for="nome">Nome</label>
-          <input type="text" [(ngModel)]="paciente.nome" id="nome" name="nome" #nome="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && nome.invalid }" placeholder="Digite o nome">
-          <div *ngIf="f.submitted && nome.invalid" class="invalid-feedback">
-            <div *ngIf="nome.errors?.['required']">Nome é obrigatório</div>
+          <input type="text" [(ngModel)]="paciente.nome" id="nome" name="nome" #nome="ngModel" required class="form-control"  placeholder="Digite o nome">
+          <div *ngIf="nome.invalid && (nome.touched)" class="alert alert-danger">
+            <span *ngIf="nome.errors?.['required']">Nome é obrigatório</span>
           </div>
         </div>
         <div class="form-group">
           <label for="sexo">Sexo</label>
-          <input type="text" [(ngModel)]="paciente.sexo" id="sexo" name="sexo" #sexo="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && sexo.invalid }" placeholder="Digite o sexo">
-          <div *ngIf="f.submitted && sexo.invalid" class="invalid-feedback">
+          <input type="text" [(ngModel)]="paciente.sexo" id="sexo" name="sexo" #sexo="ngModel" required class="form-control"  placeholder="Digite o sexo">
+          <div *ngIf="sexo.invalid && (sexo.touched)" class="alert alert-danger">
             <div *ngIf="sexo.errors?.['required']">Sexo é obrigatório</div>
           </div>
         </div>
         <div class="form-group">
           <label for="cpf">Cpf</label>
-          <input type="text" [(ngModel)]="paciente.cpf" id="cpf" name="cpf" #cpf="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && cpf.invalid }" placeholder="Digite o cpf">
-          <div *ngIf="f.submitted && cpf.invalid" class="invalid-feedback">
+          <input type="text" [(ngModel)]="paciente.cpf" id="cpf" name="cpf" #cpf="ngModel" required minlength="11" maxlength="11" class="form-control" placeholder="Digite o cpf" pattern="[0-9]*">
+          <div *ngIf="cpf.invalid && (cpf.touched)" class="alert alert-danger">
             <div *ngIf="cpf.errors?.['required']">Cpf é obrigatório</div>
+            <div *ngIf="cpf.errors?.['minlength']">Cpf deve ter 11 caracteres e somente números</div>
           </div>
         </div>
         <div class="form-group">
           <label for="celular">Celular</label>
-          <input type="text" [(ngModel)]="paciente.celular" id="celular" name="celular" #celular="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && celular.invalid }" placeholder="Digite o celular">
-          <div *ngIf="f.submitted && celular.invalid" class="invalid-feedback">
+          <input type="text" [(ngModel)]="paciente.celular" id="celular" name="celular" #celular="ngModel" required class="form-control" placeholder="Digite o celular">
+          <div *ngIf="celular.invalid && (celular.touched)" class="alert alert-danger">
             <div *ngIf="celular.errors?.['required']">Celular é obrigatório</div>
           </div>
         </div>
         <div class="form-group">
           <label for="dataNascimento">Data de Nascimento</label>
-          <input type="text" [(ngModel)]="paciente.dataNascimento" id="dataNascimento" name="dataNascimento" #dataNascimento="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && dataNascimento.invalid }" placeholder="Digite a data de nascimento">
-          <div *ngIf="f.submitted && dataNascimento.invalid" class="invalid-feedback">
+          <input type="date" [(ngModel)]="paciente.dataNascimento" id="dataNascimento" name="dataNascimento" #dataNascimento="ngModel" required class="form-control" placeholder="Digite a data de nascimento">
+          <div *ngIf="dataNascimento.invalid && (dataNascimento.touched)" class="alert alert-danger">
             <div *ngIf="dataNascimento.errors?.['required']">Data de Nascimento é obrigatório</div>
           </div>
         </div>
         <div class="form-group">
           <label for="email">E-mail</label>
-          <input type="text" [(ngModel)]="paciente.email" id="email" name="email" #email="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" placeholder="Digite o e-mail">
-          <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+          <input type="email" [(ngModel)]="paciente.email" id="email" name="email" #email="ngModel" required email class="form-control" placeholder="Digite o e-mail">
+          <div *ngIf="email.invalid && (email.touched)" class="alert alert-danger">
             <div *ngIf="email.errors?.['required']">E-mail é obrigatório</div>
+            <div *ngIf="email.errors?.['email']">E-mail inválido</div>
           </div>
         </div>
         <div class="form-group">
           <label for="informacoesAtendimento">Informações</label>
-          <input type="text" [(ngModel)]="paciente.informacoesAtendimento" id="informacoesAtendimento" name="informacoesAtendimento" #informacoesAtendimento="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && informacoesAtendimento.invalid }" placeholder="Digite as informações">
-          <div *ngIf="f.submitted && informacoesAtendimento.invalid" class="invalid-feedback">
+          <input type="text" [(ngModel)]="paciente.informacoesAtendimento" id="informacoesAtendimento" name="informacoesAtendimento" #informacoesAtendimento="ngModel" required class="form-control" placeholder="Digite as informações">
+          <div *ngIf="informacoesAtendimento.invalid && (informacoesAtendimento.touched)" class="alert alert-danger">
             <div *ngIf="informacoesAtendimento.errors?.['required']">Informações é obrigatório</div>
           </div>
         </div>
         <div class="form-group">
           <label for="rua">Rua</label>
-          <input type="text" [(ngModel)]="paciente.rua" id="rua" name="rua" #rua="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && rua.invalid }" placeholder="Digite a rua">
-          <div *ngIf="f.submitted && rua.invalid" class="invalid-feedback">
+          <input type="text" [(ngModel)]="paciente.rua" id="rua" name="rua" #rua="ngModel" required class="form-control" placeholder="Digite a rua">
+          <div *ngIf="rua.invalid && (rua.touched)" class="alert alert-danger">
             <div *ngIf="rua.errors?.['required']">Rua é obrigatório</div>
           </div>
         </div>
         <div class="form-group">
           <label for="numero">Número</label>
-          <input type="text" [(ngModel)]="paciente.numero" id="numero" name="numero" #numero="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && numero.invalid }" placeholder="Digite o número">
-          <div *ngIf="f.submitted && numero.invalid" class="invalid-feedback">
+          <input type="text" [(ngModel)]="paciente.numero" id="numero" name="numero" #numero="ngModel" required class="form-control" placeholder="Digite o número">
+          <div *ngIf="numero.invalid && (numero.touched)" class="alert alert-danger">
             <div *ngIf="numero.errors?.['required']">Número é obrigatório</div>
           </div>
         </div>
         <div class="form-group">
           <label for="bairro">Bairro</label>
-          <input type="text" [(ngModel)]="paciente.bairro" id="bairro" name="bairro" #bairro="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && bairro.invalid }" placeholder="Digite o bairro">
-          <div *ngIf="f.submitted && bairro.invalid" class="invalid-feedback">
+          <input type="text" [(ngModel)]="paciente.bairro" id="bairro" name="bairro" #bairro="ngModel" required class="form-control" placeholder="Digite o bairro">
+          <div *ngIf="bairro.invalid && (bairro.touched)" class="alert alert-danger">
             <div *ngIf="bairro.errors?.['required']">Bairro é obrigatório</div>
           </div>
         </div>
         <div class="form-group">
           <label for="cidade">Cidade</label>
-          <input type="text" [(ngModel)]="paciente.cidade" id="cidade" name="cidade" #cidade="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && cidade.invalid }" placeholder="Digite a cidade">
-          <div *ngIf="f.submitted && cidade.invalid" class="invalid-feedback">
+          <input type="text" [(ngModel)]="paciente.cidade" id="cidade" name="cidade" #cidade="ngModel" required class="form-control" placeholder="Digite a cidade">
+          <div *ngIf="cidade.invalid && (cidade.touched)" class="alert alert-danger">
             <div *ngIf="cidade.errors?.['required']">Cidade é obrigatório</div>
           </div>
         </div>
         <div class="form-group">
           <label for="estado">Estado</label>
-          <input type="text" [(ngModel)]="paciente.estado" id="estado" name="estado" #estado="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && estado.invalid }" placeholder="Digite o estado">
-          <div *ngIf="f.submitted && estado.invalid" class="invalid-feedback">
+          <input type="text" [(ngModel)]="paciente.estado" id="estado" name="estado" #estado="ngModel" required class="form-control" placeholder="Digite o estado">
+          <div *ngIf="estado.invalid && (estado.touched)" class="alert alert-danger">
             <div *ngIf="estado.errors?.['required']">Estado é obrigatório</div>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-add-paciente" onclick="window.location.reload()">Salvar</button>
+        <button type="submit" class="btn btn-primary btn-add-paciente" onclick="window.location.reload()" [disabled]="f.invalid" (onClick)=verificaEmailCadastro()>Salvar</button>
         <button type="reset" class="btn btn-secondary btn-add-paciente" (click)="cleanForm(f)">Cancelar</button>
       </form>
     </div>
-
   </div>
-
-
-  <!-- <mat-toolbar color="secondary">Lista de Pacientes</mat-toolbar>
-  <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="pageSlice">
-
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> Id </th>
-        <td mat-cell *matCellDef="let paciente"> {{paciente.id}} </td>
-      </ng-container>
-
-     
-      <ng-container matColumnDef="nome">
-        <th mat-header-cell *matHeaderCellDef> Nome </th>
-        <td mat-cell *matCellDef="let paciente"> {{paciente.nome}} </td>
-      </ng-container>
-
-    
-      <ng-container matColumnDef="sexo">
-        <th mat-header-cell *matHeaderCellDef> Sexo </th>
-        <td mat-cell *matCellDef="let paciente"> {{paciente.sexo}} </td>
-      </ng-container>
-
-      
-      <ng-container matColumnDef="cpf">
-        <th mat-header-cell *matHeaderCellDef> Cpf </th>
-        <td mat-cell *matCellDef="let paciente"> {{paciente.cpf}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="celular">
-        <th mat-header-cell *matHeaderCellDef> Celular </th>
-        <td mat-cell *matCellDef="let paciente"> {{paciente.celular}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="dataNascimento">
-        <th mat-header-cell *matHeaderCellDef> Data De Nascimento </th>
-        <td mat-cell *matCellDef="let paciente"> {{paciente.dataNascimento}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef> E-mail </th>
-        <td mat-cell *matCellDef="let paciente"> {{paciente.email}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="informacoesAtendimento">
-        <th mat-header-cell *matHeaderCellDef> Informações </th>
-        <td mat-cell *matCellDef="let paciente"> {{paciente.informacoesAtendimento}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="rua">
-        <th mat-header-cell *matHeaderCellDef> Rua </th>
-        <td mat-cell *matCellDef="let paciente"> {{paciente.rua}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="numero">
-        <th mat-header-cell *matHeaderCellDef> Número </th>
-        <td mat-cell *matCellDef="let paciente"> {{paciente.numero}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="bairro">
-        <th mat-header-cell *matHeaderCellDef> Bairro </th>
-        <td mat-cell *matCellDef="let paciente"> {{paciente.bairro}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="cidade">
-        <th mat-header-cell *matHeaderCellDef> Cidade </th>
-        <td mat-cell *matCellDef="let paciente"> {{paciente.cidade}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="estado">
-        <th mat-header-cell *matHeaderCellDef> Estado </th>
-        <td mat-cell *matCellDef="let paciente"> {{paciente.estado}} </td>
-      </ng-container>
-      
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-
-    <mat-paginator
-                  [pageSizeOptions]="[1, 2, 20]"
-                  [length]="pacientes.length"
-                  showFirstLastButtons
-                  aria-label="Select page of periodic elements"
-                  (page)="onPageChange($event)">
-    </mat-paginator>
-  </div> -->
-
-
-  
 </div>
 

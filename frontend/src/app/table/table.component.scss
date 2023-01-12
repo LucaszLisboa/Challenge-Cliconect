@@ -26,3 +26,16 @@
   border-bottom-left-radius: 5px;
 }
 
+.search{
+  padding-left: 10px;
+  margin-bottom: 15px;
+  width: 50%;
+}
+.icons{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.icon:hover {
+  color: rgb(144, 144, 144);
+}
