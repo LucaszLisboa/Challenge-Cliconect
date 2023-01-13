@@ -72,10 +72,22 @@
         </div>
         <div class="form-group">
           <label for="sexo">Sexo</label>
-          <input type="text" [(ngModel)]="paciente.sexo" id="sexo" name="sexo" #sexo="ngModel" required class="form-control"  placeholder="Digite o sexo">
+          <div class="checkbox">
+            <div>
+              <input type="radio" [(ngModel)]="paciente.sexo" id="sexo" name="sexo" #sexo="ngModel" value="Masculino" required > Masculino
+            </div>
+            <div>
+              <input type="radio" [(ngModel)]="paciente.sexo" id="sexo" name="sexo" #sexo="ngModel" value="Feminino" required> Feminino
+            </div>
+          </div>
           <div *ngIf="sexo.invalid && (sexo.touched)" class="alert alert-danger">
             <div *ngIf="sexo.errors?.['required']">Sexo é obrigatório</div>
           </div>
+          <!-- <label for="sexo">Feminino</label> -->
+          <!-- <input type="text" [(ngModel)]="paciente.sexo" id="sexo" name="sexo" #sexo="ngModel" required class="form-control"  placeholder="Digite o sexo">
+          <div *ngIf="sexo.invalid && (sexo.touched)" class="alert alert-danger">
+            <div *ngIf="sexo.errors?.['required']">Sexo é obrigatório</div>
+          </div> -->
         </div>
         <div class="form-group">
           <label for="cpf">Cpf</label>
@@ -152,7 +164,7 @@
             </div>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-add-paciente" onclick="window.location.reload()" [disabled]="f.invalid" (onClick)=verificaEmailCadastro()>Salvar</button>
+        <button type="submit" class="btn btn-primary btn-add-paciente" onclick="window.location.reload()" [disabled]="f.invalid" >Salvar</button>
         <button type="reset" class="btn btn-secondary btn-add-paciente" (click)="cleanForm(f)">Cancelar</button>
       </form>
     </div>

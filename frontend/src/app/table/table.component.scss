@@ -1,11 +1,17 @@
 .container {
   margin-top: 30px;
   max-width: 85%;
+  padding-bottom: 20px;
 }
 
 .card-header{
+  color: white;
   font-weight: bold;
   font-size: 17px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+
   background-color: #03a5c9;
 }
 
@@ -49,4 +55,10 @@
     width: 100%;
   }
 
+}
+
+.checkbox{
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
 }

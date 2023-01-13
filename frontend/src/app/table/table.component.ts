@@ -5,7 +5,6 @@ import { PacienteService } from 'src/app/services/paciente.service';
 import { Paciente } from 'src/app/models/paciente';
 import { NgForm } from '@angular/forms';
 
-
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -16,9 +15,7 @@ export class TableComponent implements OnInit, AfterViewInit {
 
   paciente = {} as Paciente;
   pacientes: Paciente[] = [];
-
   searchText = '';
-
   pageSlice: any;
 
   displayedColumns: string[] = ['id', 'nome','sexo', 'cpf', 'celular', 'email', 'dataNascimento','informacoesAtendimento','rua',
@@ -49,18 +46,6 @@ export class TableComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getPacientes();
-  }
-
-  verificaEmailCadastro() {
-    this.pacienteService.getPacientes().subscribe((pacientes: Paciente[]) => {
-      pacientes.forEach(paciente => {
-        if (paciente.email == this.paciente.email) {
-          alert('Email já cadastrado!');
-          this.paciente.email = '';
-        }
-      });
-    }
-    );
   }
 
   savePaciente (form: NgForm) {
