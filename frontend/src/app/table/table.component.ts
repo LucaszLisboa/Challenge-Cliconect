@@ -80,7 +80,7 @@ export class TableComponent implements OnInit, AfterViewInit {
     this.pacienteService.getPacientes()
       .subscribe((pacientes: Paciente[]) => {
         this.pacientes = pacientes;
-        this.pageSlice = this.pacientes.slice(0, 5);
+        this.pageSlice = this.pacientes.slice(0, 10);
     });
   }
 

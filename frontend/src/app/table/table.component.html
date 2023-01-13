@@ -51,17 +51,17 @@
       <mat-paginator
                 class="paginator"
                 [length] = "pacientes.length"
-                [pageSize]="5"
+                [pageSize]="10"
                 [pageSizeOptions]="[3, 5, 10, 20]"
                 showFirstLastButtons
                 (page)="onPageChange($event)">
       </mat-paginator>
     </div>
   </div>
-
   <div class="card add-paciente">
     <h5 class="card-header">Adicionar/Atualizar Paciente</h5>
     <div class="card-body">
+      <h2>Dados Pessoais</h2>
       <form id="add-form" (ngSubmit)="f.form.valid && savePaciente(f)" #f="ngForm" novalidate>
         <div class="form-group">
           <label for="nome">Nome</label>
@@ -108,45 +108,48 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="informacoesAtendimento">Informações</label>
+          <label for="informacoesAtendimento">Informações de Atendimento</label>
           <input type="text" [(ngModel)]="paciente.informacoesAtendimento" id="informacoesAtendimento" name="informacoesAtendimento" #informacoesAtendimento="ngModel" required class="form-control" placeholder="Digite as informações">
           <div *ngIf="informacoesAtendimento.invalid && (informacoesAtendimento.touched)" class="alert alert-danger">
             <div *ngIf="informacoesAtendimento.errors?.['required']">Informações é obrigatório</div>
           </div>
         </div>
-        <div class="form-group">
-          <label for="rua">Rua</label>
-          <input type="text" [(ngModel)]="paciente.rua" id="rua" name="rua" #rua="ngModel" required class="form-control" placeholder="Digite a rua">
-          <div *ngIf="rua.invalid && (rua.touched)" class="alert alert-danger">
-            <div *ngIf="rua.errors?.['required']">Rua é obrigatório</div>
+        <h2>Endereço</h2>
+        <div class="endereco">
+          <div class="form-group info-endereco">
+            <label for="rua">Rua</label>
+            <input type="text" [(ngModel)]="paciente.rua" id="rua" name="rua" #rua="ngModel" required class="form-control" placeholder="Digite a rua">
+            <div *ngIf="rua.invalid && (rua.touched)" class="alert alert-danger">
+              <div *ngIf="rua.errors?.['required']">Rua é obrigatório</div>
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="numero">Número</label>
-          <input type="text" [(ngModel)]="paciente.numero" id="numero" name="numero" #numero="ngModel" required class="form-control" placeholder="Digite o número">
-          <div *ngIf="numero.invalid && (numero.touched)" class="alert alert-danger">
-            <div *ngIf="numero.errors?.['required']">Número é obrigatório</div>
+          <div class="form-group info-endereco">
+            <label for="numero">Número</label>
+            <input type="text" [(ngModel)]="paciente.numero" id="numero" name="numero" #numero="ngModel" required class="form-control" placeholder="Digite o número">
+            <div *ngIf="numero.invalid && (numero.touched)" class="alert alert-danger">
+              <div *ngIf="numero.errors?.['required']">Número é obrigatório</div>
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="bairro">Bairro</label>
-          <input type="text" [(ngModel)]="paciente.bairro" id="bairro" name="bairro" #bairro="ngModel" required class="form-control" placeholder="Digite o bairro">
-          <div *ngIf="bairro.invalid && (bairro.touched)" class="alert alert-danger">
-            <div *ngIf="bairro.errors?.['required']">Bairro é obrigatório</div>
+          <div class="form-group info-endereco">
+            <label for="bairro">Bairro</label>
+            <input type="text" [(ngModel)]="paciente.bairro" id="bairro" name="bairro" #bairro="ngModel" required class="form-control" placeholder="Digite o bairro">
+            <div *ngIf="bairro.invalid && (bairro.touched)" class="alert alert-danger">
+              <div *ngIf="bairro.errors?.['required']">Bairro é obrigatório</div>
+            </div>
+          </div> 
+          <div class="form-group info-endereco">
+            <label for="cidade">Cidade</label>
+            <input type="text" [(ngModel)]="paciente.cidade" id="cidade" name="cidade" #cidade="ngModel" required class="form-control" placeholder="Digite a cidade">
+            <div *ngIf="cidade.invalid && (cidade.touched)" class="alert alert-danger">
+              <div *ngIf="cidade.errors?.['required']">Cidade é obrigatório</div>
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="cidade">Cidade</label>
-          <input type="text" [(ngModel)]="paciente.cidade" id="cidade" name="cidade" #cidade="ngModel" required class="form-control" placeholder="Digite a cidade">
-          <div *ngIf="cidade.invalid && (cidade.touched)" class="alert alert-danger">
-            <div *ngIf="cidade.errors?.['required']">Cidade é obrigatório</div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="estado">Estado</label>
-          <input type="text" [(ngModel)]="paciente.estado" id="estado" name="estado" #estado="ngModel" required class="form-control" placeholder="Digite o estado">
-          <div *ngIf="estado.invalid && (estado.touched)" class="alert alert-danger">
-            <div *ngIf="estado.errors?.['required']">Estado é obrigatório</div>
+          <div class="form-group info-endereco">
+            <label for="estado">Estado</label>
+            <input type="text" [(ngModel)]="paciente.estado" id="estado" name="estado" #estado="ngModel" required class="form-control" placeholder="Digite o estado">
+            <div *ngIf="estado.invalid && (estado.touched)" class="alert alert-danger">
+              <div *ngIf="estado.errors?.['required']">Estado é obrigatório</div>
+            </div>
           </div>
         </div>
         <button type="submit" class="btn btn-primary btn-add-paciente" onclick="window.location.reload()" [disabled]="f.invalid" (onClick)=verificaEmailCadastro()>Salvar</button>

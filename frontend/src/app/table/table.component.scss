@@ -39,3 +39,14 @@
 .icon:hover {
   color: rgb(144, 144, 144);
 }
+
+.endereco{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+
+  .info-endereco{
+    width: 100%;
+  }
+
+}
