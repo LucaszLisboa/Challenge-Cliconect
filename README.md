@@ -1,5 +1,14 @@
 # Challenge-Cliconect
 
+Este é um sistema de gerenciamento de pacientes para uma clínica médica. Ele permite cadastrar pacientes com informações obrigatórias como nome, sexo, endereços, CPF (com validação), celular, data de nascimento (com validação) e e-mail (com validação). Além disso, permite registrar informações sobre os atendimentos médicos realizados.
+
+O sistema também permite editar e excluir pacientes já cadastrados, além de oferecer recursos de listagem e busca/filtro pelo nome, e-mail e CPF.
+
+Para o desenvolvimento, o backend do sistema expõe uma API REST e foi construído usando Java 17, Spring Data e Spring Boot. Além disso, foi adicionado testes unitários para garantir a qualidade do código. O frontend foi desenvolvido usando Angular.
+
+<br>
+
+# Como executar
 Certifique-se de ter o Java 17 e o Maven instalados em sua máquina. Você pode verificar se eles estão instalados digitando "java -version" e "mvn -version" no terminal.
 
 Faça o clone do repositório para sua máquina local.
